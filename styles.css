@@ -1,0 +1,25 @@
+
+.board-game {
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    border: 3px solid black; 
+    width: 900px; 
+    height: 850px;
+    gap: 10px; 
+    position: absolute; 
+    left: 400px;    
+} 
+
+.card-game {
+    border: 3px solid black; 
+    width: 120px; 
+    height: 100px;
+    padding-top: 75px; 
+    padding-left: 75px; 
+    margin-left: 10px; 
+    margin-top: 10px; 
+    font-size:25px; 
+    background-color: grey; 
+    
+}
