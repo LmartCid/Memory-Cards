@@ -1,8 +1,8 @@
 
 const NUMBER_OF_CARDS = 16; 
 const CARD_REVERSE = "❓";  
-const MILISECONDS = 1000; 
-const NUMBERS_TESTING = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; 
+const MILISECONDS_FLIPPBACK_DELAY = 1000; 
+const DEFAULT_CONTENT_CARD = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; 
 
 function generateGameBoard() {
     const board = document.createElement("div"); 
@@ -10,12 +10,13 @@ function generateGameBoard() {
     document.body.appendChild(board); 
     return board;    
 } 
-function generateDeckContent(array) { 
-    const duplicatedContent = [...array, ...array]; 
+
+function generateDeckContent(contentCards) {  
+    const duplicatedContent = [...contentCards, ...contentCards]; 
     duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
     }); 
-    return duplicatedContent.slice(0, 16);  
+    return duplicatedContent.slice(0, NUMBER_OF_CARDS);  
 }
 
 
@@ -62,12 +63,12 @@ function compareCards(card1, card2) {
         setTimeout(() => { 
             card1.innerText = CARD_REVERSE; 
             card2.innerText = CARD_REVERSE; 
-        }, MILISECONDS) 
+        }, MILISECONDS_FLIPPBACK_DELAY) 
 
     }
 }
  
 const container = generateGameBoard(); 
 const cardsDeck = generateCards(container);  
-const content = generateDeckContent(NUMBERS_TESTING); 
-playGame(cardsDeck, content);  
+const deckContent = generateDeckContent(DEFAULT_CONTENT_CARD); 
+playGame(cardsDeck, deckContent);  
