@@ -13,6 +13,7 @@ html, body {
     border: 3px solid black; 
     height: 100%; 
     width: 95%; 
+    border-radius: 10px; 
       
  } 
  .card-game {
@@ -23,7 +24,9 @@ html, body {
     width: 22%; 
     height: 15%;
     background-color: grey; 
-    font-size: 35px; 
+    font-size: 35px;
+    border-radius:10px;  
+    cursor: pointer;
  }
 
 @media(min-width: 600px) { 
