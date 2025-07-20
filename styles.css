@@ -2,6 +2,11 @@ html, body {
     height: 100%; 
     width: 100%; 
  } 
+ body {
+    display:flex; 
+    justify-content:center; 
+    align-items: center;
+ }
  
  .board-game {
     display: flex; 
@@ -26,7 +31,31 @@ html, body {
     background-color: grey; 
     font-size: 35px;
     border-radius:10px;  
-    cursor: pointer;
+    
+ } 
+
+ .winner-screen {
+    display:flex; 
+    justify-content: center; 
+    align-items: flex-end;
+    background-image:url("./images/winner.png"); 
+    background-size:cover; 
+    background-repeat:no-repeat;  
+    height: 100%;
+    width: 100%;  
+     
+ } 
+
+ .back-menu-option {
+    font-size:20px; 
+    background-color:#9F9BFF; 
+    cursor:pointer; 
+ }
+
+ .play-again-option {
+    font-size:20px; 
+    background-color:#9F9BFF; 
+    cursor:pointer; 
  }
 
 @media(min-width: 600px) { 
@@ -61,7 +90,32 @@ body {
     height: 20%;
     font-size:25px; 
     background-color: grey; 
-    font-size: 35px;     
+    font-size: 35px;  
+    cursor:pointer;    
+} 
+
+.winner-screen {
+    display:flex; 
+    justify-content: center;
+    align-items: flex-end;
+    background-image:url("./images/winner.png"); 
+    background-size:contain; 
+    background-repeat:no-repeat;  
+    background-position: center;
+    gap:15px; 
+    height: 85%;
+    width: 100%;      
 }
+.back-menu-option {
+    font-size:20px; 
+    background-color: #9F9BFF;
+    cursor:pointer; 
+}
+
+.play-again-option {
+    font-size: 20px; 
+    background-color: #9F9BFF;
+    cursor:pointer; 
+ }
 
 }
