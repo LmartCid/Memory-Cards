@@ -2,7 +2,8 @@
 const NUMBER_OF_CARDS = 16; 
 const CARD_REVERSE = "❓";  
 const MILISECONDS_FLIPPBACK_DELAY = 1000; 
-const DEFAULT_CONTENT_CARD = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; 
+const MILISECONDS_TO_VICTORY_SCENE = 1000; 
+const DEFAULT_CONTENT_CARD = [1, 2, 3, 4, 5, 6, 7, 8]; 
 
 function generateGameBoard() {
     const board = document.createElement("div"); 
@@ -36,7 +37,7 @@ function generateCards(container) {
 
 
 
-function playGame(cards, arrayContents) { 
+function playGame(cards, arrayContents, board) { 
     const cardsSelected = [];  
     cards.forEach((card, index) => { 
         card.addEventListener("click", () => {
@@ -47,10 +48,17 @@ function playGame(cards, arrayContents) {
             if(cardsSelected.length === 2) { 
                 compareCards(cardsSelected[0], cardsSelected[1]); 
                 cardsSelected.length = 0;  
-
             }
-        })
-       
+            const cardsUp = checkBoardGame(cards, board);
+            if(cardsUp) { 
+                setTimeout(() => {
+                    generateWinnerScreen(board); 
+                    winnerSceneButtons = getWinnerSceneButtons(); 
+                    pressPlayAgainOption(winnerSceneButtons, board, DEFAULT_CONTENT_CARD); 
+                }, MILISECONDS_TO_VICTORY_SCENE)
+                
+            }  
+        })  
     }); 
 }
 
@@ -67,8 +75,25 @@ function compareCards(card1, card2) {
 
     }
 }
+
+function checkBoardGame(cards) { 
+    const cardsUp = cards.filter((card)=> {
+        return card.innerText !== CARD_REVERSE; 
+    })
+
+    if(cardsUp.length === NUMBER_OF_CARDS) {
+       return true; 
+    } 
+    else {
+        return false; 
+    }
+
+}
  
-const container = generateGameBoard(); 
-const cardsDeck = generateCards(container);  
+const board = generateGameBoard(); 
+const cardsDeck = generateCards(board);  
 const deckContent = generateDeckContent(DEFAULT_CONTENT_CARD); 
-playGame(cardsDeck, deckContent);  
+playGame(cardsDeck, deckContent, board);  
+
+
+
