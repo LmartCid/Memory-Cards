@@ -42,8 +42,7 @@ html, body {
     background-size:cover; 
     background-repeat:no-repeat;  
     height: 100%;
-    width: 100%;  
-     
+    width: 100%;      
  } 
 
  .back-menu-option {
@@ -56,6 +55,35 @@ html, body {
     font-size:20px; 
     background-color:#9F9BFF; 
     cursor:pointer; 
+ }
+
+ .main-menu {
+    display:flex; 
+    flex-direction:column; 
+    justify-content:flex-end; 
+    align-items: center; 
+    gap:5px; 
+    width: 95%;
+    height: 90%;
+    background-image: url("./images/mainMenu-background.png");
+    background-size:cover; 
+    background-repeat:no-repeat; 
+    background-position:center; 
+ }
+ .start-main-option {
+    font-size: 20px; 
+    background-color: #F4D58D; 
+    cursor:pointer; 
+    width:85px; 
+   
+ } 
+
+ .selector-main-option {
+    font-size:20px; 
+    background-color:#E87A68; 
+    cursor:pointer; 
+    width:85px; 
+    
  }
 
 @media(min-width: 600px) { 
@@ -116,6 +144,33 @@ body {
     font-size: 20px; 
     background-color: #9F9BFF;
     cursor:pointer; 
+ } 
+
+ .main-menu {
+    display:flex; 
+    flex-direction:column; 
+    justify-content: flex-end; 
+    align-items:center; 
+    gap:5px; 
+    width: 95%;
+    height: 90%;
+    background-image:url("./images/mainMenu-background.png"); 
+    background-size:contain; 
+    background-repeat:no-repeat; 
+    background-position:center; 
+ } 
+
+ .start-main-option {
+    font-size:20px; 
+    background-color:#F4D58D; 
+    cursor:pointer; 
+    width:85px;   
  }
 
+ .selector-main-option {
+    font-size:20px; 
+    background-color:#E87A68; 
+    cursor:pointer; 
+    width:85px; 
+ }
 }

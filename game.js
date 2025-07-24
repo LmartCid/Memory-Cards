@@ -17,7 +17,7 @@ function generateDeckContent(contentCards) {
     duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
     }); 
-    return duplicatedContent.slice(0, NUMBER_OF_CARDS);  
+    return duplicatedContent;  
 }
 
 
@@ -55,6 +55,8 @@ function playGame(cards, arrayContents, board) {
                     generateWinnerScreen(board); 
                     winnerSceneButtons = getWinnerSceneButtons(); 
                     pressPlayAgainOption(winnerSceneButtons, board, DEFAULT_CONTENT_CARD); 
+                    pressBackMenuOption(winnerSceneButtons, DEFAULT_CONTENT_CARD);  
+
                 }, MILISECONDS_TO_VICTORY_SCENE)
                 
             }  
@@ -89,11 +91,12 @@ function checkBoardGame(cards) {
     }
 
 }
- 
-const board = generateGameBoard(); 
-const cardsDeck = generateCards(board);  
-const deckContent = generateDeckContent(DEFAULT_CONTENT_CARD); 
-playGame(cardsDeck, deckContent, board);  
+
+      
+const boardMenu = generateMainMenu();  
+const menuButtons = getMainMenuButtons(); 
+const startMenuButton = menuButtons[0]; 
+const themesMenuButton = menuButtons[1]; 
 
 
-
+pressStartOptionMainMenu(startMenuButton, boardMenu, DEFAULT_CONTENT_CARD); 
