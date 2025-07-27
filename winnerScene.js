@@ -30,26 +30,27 @@ function getWinnerSceneButtons() {
     return winnerSceneButtons; 
 } 
 
-function pressPlayAgainOption(winnerSceneButtons, board, contentDefault) { 
-    if(winnerSceneButtons.length === 2) { 
-        winnerSceneButtons[0].addEventListener("click", () => {
+function pressPlayAgainOption(playAgainButton, board, contentDefault) { 
+     
+        playAgainButton.addEventListener("click", () => {
             board.remove(); 
             const boardGame = generateGameBoard(); 
             const cards = generateCards(boardGame);  
             const deckContent = generateDeckContent(contentDefault);  
             playGame(cards, deckContent, boardGame);  
         })
-    }
+    
 }
 
-function pressBackMenuOption(winnerSceneButtons, contentDefault) {
-    if(winnerSceneButtons.length === 2) { 
-        winnerSceneButtons[1].addEventListener("click", () => { 
+function pressBackMenuOption(backMenuButton, contentDefault) {
+     
+        backMenuButton.addEventListener("click", () => { 
             const winnerBoardScene = document.body.querySelector(".winner-screen");
             winnerBoardScene.remove();  
             const boardMenu = generateMainMenu();  
             const  mainMenuButtons = getMainMenuButtons(); 
-            pressStartOptionMainMenu(mainMenuButtons, boardMenu, contentDefault); 
+            const startMenuButton = mainMenuButtons[0]; 
+            pressStartOptionMainMenu(startMenuButton, boardMenu, contentDefault); 
         })
-    }
+    
 }

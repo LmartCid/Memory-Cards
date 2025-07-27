@@ -36,12 +36,9 @@ function pressStartOptionMainMenu(startMainMenuButton, board, contentDefault) {
         
 }  
 
-function pressThemesOptionMenu(mainMenuButtons, board) { 
-    // Refactor, darle una vuelta
-    if(mainMenuButtons.length === 2) { 
-        mainMenuButtons[1].addEventListener("click", () => {
-            // Pasar a la pantalla de seleccion de temas. 
-        })
-
-    }
+function pressThemesOptionMenu(selectThemesButton, board) {  
+    selectThemesButton.addEventListener("click", () => {
+        
+    })
+    
 }
