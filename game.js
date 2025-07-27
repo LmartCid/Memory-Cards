@@ -53,9 +53,11 @@ function playGame(cards, arrayContents, board) {
             if(cardsUp) { 
                 setTimeout(() => {
                     generateWinnerScreen(board); 
-                    winnerSceneButtons = getWinnerSceneButtons(); 
-                    pressPlayAgainOption(winnerSceneButtons, board, DEFAULT_CONTENT_CARD); 
-                    pressBackMenuOption(winnerSceneButtons, DEFAULT_CONTENT_CARD);  
+                    winnerSceneButtons = getWinnerSceneButtons();
+                    const playAgainButton = winnerSceneButtons[0]; 
+                    const backMenuButtonn = winnerSceneButtons[1]; 
+                    pressPlayAgainOption(playAgainButton, board, DEFAULT_CONTENT_CARD); 
+                    pressBackMenuOption(backMenuButtonn, DEFAULT_CONTENT_CARD);  
 
                 }, MILISECONDS_TO_VICTORY_SCENE)
                 
