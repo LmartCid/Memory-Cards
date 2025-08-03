@@ -84,6 +84,47 @@ html, body {
     cursor:pointer; 
     width:85px; 
     
+ } 
+
+ .themes-screen {
+   display:flex; 
+   flex-direction:column; 
+   justify-content: center;
+   align-items: center;
+   gap:20px; 
+   width: 95%;
+   height: 90%;
+   border:3px solid black; 
+   background-image: url("./images/themes-Screen.png"); 
+   background-size: cover;
+   
+ }
+ .food-theme-option {
+   font-size:25px; 
+   cursor:pointer; 
+   background-color: #9F9BFF;
+   border-radius: 5%;
+ } 
+ .animals-theme-option {
+   font-size: 25px; 
+   cursor:pointer; 
+   background-color: #E87A68;
+   border-radius: 5%;
+ }
+ .magic-theme-option {
+   font-size: 25px;
+   cursor:pointer; 
+   background-color: #4FC3F7;
+   border-radius:5%; 
+ }
+
+ .back-menu-theme-screen {
+   font-size:17px; 
+    background-color:#F4D58D; 
+    cursor:pointer; 
+    width:110px; 
+    margin-bottom: 15px;
+   border-radius: 5%; 
  }
 
 @media(min-width: 600px) { 
@@ -173,4 +214,46 @@ body {
     cursor:pointer; 
     width:85px; 
  }
+
+ .themes-screen {
+   display: flex;
+   gap:25px; 
+   flex-direction: column;
+   justify-content: flex-end; 
+   align-items: center;
+   width: 95%;
+   height: 90%;
+   border:3px solid black; 
+   background-image: url("./images/themes-Screen.png"); 
+   background-size: cover;
+ } 
+ .food-theme-option {
+   font-size: 25px; 
+   cursor: pointer;
+   background-color: #9F9BFF;
+   border-radius: 5%; 
+ } 
+ .animals-theme-option {
+   font-size:25px; 
+   cursor: pointer;
+   background-color: #E87A68; 
+   border-radius: 5%;
+ } 
+ .magic-theme-option {
+   font-size: 25px; 
+   cursor: pointer;
+   background-color: #4FC3F7;
+   border-radius: 5%;
+ }
+
+ .back-menu-theme-screen {
+   font-size:17px; 
+    background-color:#F4D58D; 
+    cursor:pointer; 
+    width:110px; 
+    margin-bottom: 15px;
+   border-radius: 5%;
+
+ }
+
 }
