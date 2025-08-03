@@ -4,23 +4,50 @@ const CARD_REVERSE = "❓";
 const MILISECONDS_FLIPPBACK_DELAY = 1000; 
 const MILISECONDS_TO_VICTORY_SCENE = 1000; 
 const DEFAULT_CONTENT_CARD = [1, 2, 3, 4, 5, 6, 7, 8]; 
+const FOOD_CONTENT_CARD = ["🍔", "🍟","🌭", "🍕","🥗", "🥪", "🍿", "🥩"]; 
+const ANIMALS_CONTENT_CARD = ["🐵", "🐱", "🐸", "🐰", "🐤", "🐷", "🐶", "🦀",]; 
+const MAGIC_CONTENT_CARD = ["🧙‍♂️", "🎩", "🔮", "✨", "🧙🏾‍♀️", "🧛‍♂️", "🦄", "🐉"]; 
 const PLAY_AGAIN_SYMBOL = "🔁"; 
 const BACK_MENU_SYMBOL = "🏠"; 
-let currentTheme = "default"; 
+let currentTheme = "food"; 
 
 function generateGameBoard() {
+
+
     const board = document.createElement("div"); 
     board.classList.add("board-game"); 
     document.body.appendChild(board); 
     return board;    
 } 
 
-function generateDeckContent() {  
-    const duplicatedContent = [...DEFAULT_CONTENT_CARD, ...DEFAULT_CONTENT_CARD]; 
-    duplicatedContent.sort(() => {
+function generateDeckContent() { 
+
+    let duplicatedContent; 
+
+    if(currentTheme === "food") {
+        duplicatedContent = [...FOOD_CONTENT_CARD, ...FOOD_CONTENT_CARD]; 
+        duplicatedContent.sort(() => {
+        return Math.random() - 0.5; 
+    });  
+    } 
+
+    if(currentTheme === "animals") {
+        duplicatedContent = [...ANIMALS_CONTENT_CARD, ...ANIMALS_CONTENT_CARD]; 
+        duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
     }); 
-    return duplicatedContent;  
+     
+    } 
+
+    if(currentTheme === "magic") {
+        duplicatedContent = [...MAGIC_CONTENT_CARD, ...MAGIC_CONTENT_CARD]; 
+        duplicatedContent.sort(() => {
+        return Math.random() - 0.5; 
+    }); 
+    } 
+    return duplicatedContent; 
+
+    
 }
 
 
@@ -72,7 +99,7 @@ function playGame() {
                     const winnerSceneButtons = getWinnerSceneButtons();
                     const backMenuButtonn = winnerSceneButtons[1]; 
                     pressPlayAgainOption(board); 
-                    pressBackMenuOption(backMenuButtonn, DEFAULT_CONTENT_CARD);  
+                    pressBackMenuOption(backMenuButtonn);  
 
                 }, MILISECONDS_TO_VICTORY_SCENE)
                 
@@ -160,6 +187,21 @@ function generateThemesScreen() {
 
     // Aqui van las acciones que ejecutaran cada uno de los botones: 
 
+    foodThemeButton.addEventListener("click", () => {
+        currentTheme = "food"; 
+        console.log("El tema seleccionado es comida"); 
+    })
+
+    animalsThemeButton.addEventListener("click", () => {
+        currentTheme = "animals"; 
+        console.log("El tema seleccionado es animales");  
+    })
+
+    magicThemeButton.addEventListener("click", () => {
+        currentTheme = "magic"; 
+        console.log("El tema seleccionado es magia. "); 
+    })
+
     backMenuButton.addEventListener("click", () => {
         selectThemesBoard.remove(); 
         generateMainMenu(); 
@@ -185,7 +227,23 @@ function goesToGame (boardMenu) {
 
         boardMenu.innerHTML = "";
         boardMenu.classList.remove("main-menu"); 
-        boardMenu.classList.add("board-game");   
+        boardMenu.classList.add("board-game"); 
+
+        if(currentTheme === "food") { 
+            document.body.className = ""; 
+            document.body.classList.add("food-theme-background"); 
+        }
+
+        if(currentTheme === "animals") { 
+            document.body.className = ""; 
+            document.body.classList.add("animals-theme-background"); 
+        } 
+
+        if(currentTheme === "magic") { 
+            document.body.className = ""; 
+            document.body.classList.add("magic-theme-background"); 
+        }
+        
         playGame();  
 }
 
@@ -249,6 +307,7 @@ function pressBackMenuOption(backMenuButton) {
         backMenuButton.addEventListener("click", () => { 
             const winnerBoardScene = document.body.querySelector(".winner-screen");
             winnerBoardScene.remove(); 
+            document.body.className = ""; 
             generateMainMenu();  
             // const boardMenu = generateMainMenu();  
             // const  mainMenuButtons = getMainMenuButtons(); 

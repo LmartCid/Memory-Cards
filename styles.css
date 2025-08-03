@@ -15,7 +15,6 @@ html, body {
     justify-content: center; 
     align-items: center; 
     gap: 10px; 
-    border: 3px solid black; 
     height: 100%; 
     width: 95%; 
     border-radius: 10px; 
@@ -127,6 +126,18 @@ html, body {
    border-radius: 5%; 
  }
 
+ .food-theme-background {
+   background-color: #FF7043;
+ } 
+
+ .animals-theme-background {
+   background-color: #689F38;
+ } 
+
+ .magic-theme-background {
+   background-color: #7C4DFF;
+ }
+
 @media(min-width: 600px) { 
     html, body {
     height: 100%;
@@ -142,7 +153,6 @@ body {
 .board-game {
     display: flex; 
     flex-direction: row; 
-    border: 3px solid black; 
     justify-content: center; 
     flex-wrap: wrap; 
     gap: 10px; 
@@ -254,6 +264,18 @@ body {
     margin-bottom: 15px;
    border-radius: 5%;
 
+ }
+
+  .food-theme-background {
+   background-color: #FF7043;
+ } 
+
+ .animals-theme-background {
+   background-color: #689F38;
+ } 
+
+ .magic-theme-background {
+   background-color: #7C4DFF;
  }
 
 }
