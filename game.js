@@ -6,6 +6,7 @@ const MILISECONDS_TO_VICTORY_SCENE = 1000;
 const DEFAULT_CONTENT_CARD = [1, 2, 3, 4, 5, 6, 7, 8]; 
 const PLAY_AGAIN_SYMBOL = "🔁"; 
 const BACK_MENU_SYMBOL = "🏠"; 
+let currentTheme = "default"; 
 
 function generateGameBoard() {
     const board = document.createElement("div"); 
@@ -119,6 +120,9 @@ function generateMainMenu() {
     boardMenu.classList.add("main-menu"); 
     
     createStartMenuButton(boardMenu)
+    createSelectThemesMenuButton(boardMenu); 
+
+
 
     // const selectThemeMenuOption = document.createElement("button");  
     // selectThemeMenuOption.classList.add("selector-main-option"); 
@@ -127,6 +131,40 @@ function generateMainMenu() {
 
     document.body.appendChild(boardMenu);  
 } 
+
+function createSelectThemesMenuButton(boardMenu) { 
+    const themesMenuButton = document.createElement("button"); 
+    themesMenuButton.classList.add("selector-main-option");  
+    themesMenuButton.innerText = "Themes"; 
+    boardMenu.appendChild(themesMenuButton); 
+
+    themesMenuButton.addEventListener("click", () => {
+        boardMenu.remove();
+        generateThemesScreen();   
+    })  
+
+}
+
+function generateThemesScreen() { 
+    const selectThemesBoard = document.createElement("div"); 
+    selectThemesBoard.classList.add("themes-screen"); 
+    const foodThemeButton = createButton("Food Theme", "food-theme-option"); 
+    const animalsThemeButton = createButton("Animals Theme", "animals-theme-option");   
+    const magicThemeButton = createButton("Magic Theme", "magic-theme-option"); 
+    const backMenuButton = createButton("🏠 Back to menu","back-menu-theme-screen" ); 
+    document.body.appendChild(selectThemesBoard);  
+    selectThemesBoard.appendChild(foodThemeButton); 
+    selectThemesBoard.appendChild(animalsThemeButton); 
+    selectThemesBoard.appendChild(magicThemeButton); 
+    selectThemesBoard.appendChild(backMenuButton);   
+
+    // Aqui van las acciones que ejecutaran cada uno de los botones: 
+
+    backMenuButton.addEventListener("click", () => {
+        selectThemesBoard.remove(); 
+        generateMainMenu(); 
+    })
+}
 
 
 function createStartMenuButton (boardMenu) {
@@ -165,15 +203,7 @@ function goesToGame (boardMenu) {
 // } 
 
 
-
-function pressThemesOptionMenu(selectThemesButton, board) {  
-    selectThemesButton.addEventListener("click", () => {
-        
-    })
-    
-}
  
-
 function createButton (text, className) {
     const button = document.createElement("button"); 
     button.innerText = text;  
