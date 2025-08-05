@@ -9,7 +9,8 @@ const ANIMALS_CONTENT_CARD = ["🐵", "🐱", "🐸", "🐰", "🐤", "🐷", "�
 const MAGIC_CONTENT_CARD = ["🧙‍♂️", "🎩", "🔮", "✨", "🧙🏾‍♀️", "🧛‍♂️", "🦄", "🐉"]; 
 const PLAY_AGAIN_SYMBOL = "🔁"; 
 const BACK_MENU_SYMBOL = "🏠"; 
-let currentTheme = "food"; 
+const THEMES = {FOOD:"food", ANIMALS: "animals", MAGIC:"magic"}
+let currentTheme = THEMES.FOOD; 
 
 function generateGameBoard() {
 
@@ -22,16 +23,16 @@ function generateGameBoard() {
 
 function generateDeckContent() { 
 
-    let duplicatedContent; 
+    let duplicatedContent = []; 
 
-    if(currentTheme === "food") {
+    if(currentTheme === THEMES.FOOD) {
         duplicatedContent = [...FOOD_CONTENT_CARD, ...FOOD_CONTENT_CARD]; 
         duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
     });  
     } 
 
-    if(currentTheme === "animals") {
+    if(currentTheme === THEMES.ANIMALS) { 
         duplicatedContent = [...ANIMALS_CONTENT_CARD, ...ANIMALS_CONTENT_CARD]; 
         duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
@@ -39,7 +40,7 @@ function generateDeckContent() {
      
     } 
 
-    if(currentTheme === "magic") {
+    if(currentTheme === THEMES.MAGIC) { 
         duplicatedContent = [...MAGIC_CONTENT_CARD, ...MAGIC_CONTENT_CARD]; 
         duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
@@ -229,17 +230,17 @@ function goesToGame (boardMenu) {
         boardMenu.classList.remove("main-menu"); 
         boardMenu.classList.add("board-game"); 
 
-        if(currentTheme === "food") { 
+        if(currentTheme === THEMES.FOOD) { 
             document.body.className = ""; 
             document.body.classList.add("food-theme-background"); 
         }
 
-        if(currentTheme === "animals") { 
+        if(currentTheme === THEMES.ANIMALS) {  
             document.body.className = ""; 
             document.body.classList.add("animals-theme-background"); 
         } 
 
-        if(currentTheme === "magic") { 
+        if(currentTheme === THEMES.MAGIC) { 
             document.body.className = ""; 
             document.body.classList.add("magic-theme-background"); 
         }
