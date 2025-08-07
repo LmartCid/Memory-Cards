@@ -9,8 +9,9 @@ const ANIMALS_CONTENT_CARD = ["🐵", "🐱", "🐸", "🐰", "🐤", "🐷", "�
 const MAGIC_CONTENT_CARD = ["🧙‍♂️", "🎩", "🔮", "✨", "🧙🏾‍♀️", "🧛‍♂️", "🦄", "🐉"]; 
 const PLAY_AGAIN_SYMBOL = "🔁"; 
 const BACK_MENU_SYMBOL = "🏠"; 
-const THEMES = {FOOD:"food", ANIMALS: "animals", MAGIC:"magic"}
-let currentTheme = THEMES.FOOD; 
+const THEMES = {"food":FOOD_CONTENT_CARD, "animals":ANIMALS_CONTENT_CARD, "magic":MAGIC_CONTENT_CARD}
+const STYLES_THEMES = {"food": "food-theme-background", "animals": "animals-theme-background", "magic": "magic-theme-background"}
+let currentTheme = "food"; 
 
 function generateGameBoard() {
 
@@ -24,31 +25,12 @@ function generateGameBoard() {
 function generateDeckContent() { 
 
     let duplicatedContent = []; 
+    duplicatedContent = [...THEMES[currentTheme], ...THEMES[currentTheme]]; 
 
-    if(currentTheme === THEMES.FOOD) {
-        duplicatedContent = [...FOOD_CONTENT_CARD, ...FOOD_CONTENT_CARD]; 
-        duplicatedContent.sort(() => {
+    duplicatedContent.sort(() => {
         return Math.random() - 0.5; 
-    });  
-    } 
-
-    if(currentTheme === THEMES.ANIMALS) { 
-        duplicatedContent = [...ANIMALS_CONTENT_CARD, ...ANIMALS_CONTENT_CARD]; 
-        duplicatedContent.sort(() => {
-        return Math.random() - 0.5; 
-    }); 
-     
-    } 
-
-    if(currentTheme === THEMES.MAGIC) { 
-        duplicatedContent = [...MAGIC_CONTENT_CARD, ...MAGIC_CONTENT_CARD]; 
-        duplicatedContent.sort(() => {
-        return Math.random() - 0.5; 
-    }); 
-    } 
-    return duplicatedContent; 
-
-    
+    })
+    return duplicatedContent;     
 }
 
 
@@ -115,17 +97,13 @@ function compareCards(cards) {
 
     const [card1, card2] = cards
 
-    if(card1.innerText === card2.innerText) {
-        console.log("son iguales");  
-    } 
-    else {
-        console.log("No son iguales");  
+    if(card1.innerText !== card2.innerText) {
+         console.log("No son iguales");  
         setTimeout(() => { 
             card1.innerText = CARD_REVERSE; 
             card2.innerText = CARD_REVERSE; 
         }, MILISECONDS_FLIPPBACK_DELAY) 
-
-    }
+    }       
 }
 
 function checkIfPlayersWin() { 
@@ -141,22 +119,11 @@ function checkIfPlayersWin() {
 
 
 function generateMainMenu() {  
-    // Pinta la pantalla
-
-    // Crear boardMenu
     const boardMenu = document.createElement("div"); 
     boardMenu.classList.add("main-menu"); 
     
     createStartMenuButton(boardMenu)
     createSelectThemesMenuButton(boardMenu); 
-
-
-
-    // const selectThemeMenuOption = document.createElement("button");  
-    // selectThemeMenuOption.classList.add("selector-main-option"); 
-    // selectThemeMenuOption.innerText = "Themes"; 
-    // boardMenu.appendChild(selectThemeMenuOption);  
-
     document.body.appendChild(boardMenu);  
 } 
 
@@ -176,31 +143,22 @@ function createSelectThemesMenuButton(boardMenu) {
 function generateThemesScreen() { 
     const selectThemesBoard = document.createElement("div"); 
     selectThemesBoard.classList.add("themes-screen"); 
-    const foodThemeButton = createButton("Food Theme", "food-theme-option"); 
-    const animalsThemeButton = createButton("Animals Theme", "animals-theme-option");   
-    const magicThemeButton = createButton("Magic Theme", "magic-theme-option"); 
-    const backMenuButton = createButton("🏠 Back to menu","back-menu-theme-screen" ); 
+    const foodThemeButton = createButton("Food Theme", "food-theme-option", selectThemesBoard); 
+    const animalsThemeButton = createButton("Animals Theme", "animals-theme-option",selectThemesBoard);   
+    const magicThemeButton = createButton("Magic Theme", "magic-theme-option", selectThemesBoard); 
+    const backMenuButton = createButton("🏠 Back to menu","back-menu-theme-screen", selectThemesBoard ); 
     document.body.appendChild(selectThemesBoard);  
-    selectThemesBoard.appendChild(foodThemeButton); 
-    selectThemesBoard.appendChild(animalsThemeButton); 
-    selectThemesBoard.appendChild(magicThemeButton); 
-    selectThemesBoard.appendChild(backMenuButton);   
-
-    // Aqui van las acciones que ejecutaran cada uno de los botones: 
 
     foodThemeButton.addEventListener("click", () => {
         currentTheme = "food"; 
-        console.log("El tema seleccionado es comida"); 
     })
 
     animalsThemeButton.addEventListener("click", () => {
         currentTheme = "animals"; 
-        console.log("El tema seleccionado es animales");  
     })
 
     magicThemeButton.addEventListener("click", () => {
         currentTheme = "magic"; 
-        console.log("El tema seleccionado es magia. "); 
     })
 
     backMenuButton.addEventListener("click", () => {
@@ -212,7 +170,7 @@ function generateThemesScreen() {
 
 function createStartMenuButton (boardMenu) {
 
-      // Crear StartMenu
+      
     const startMenuButton = document.createElement("button"); 
     startMenuButton.classList.add("start-main-option"); 
     startMenuButton.innerText = "Start"; 
@@ -230,43 +188,17 @@ function goesToGame (boardMenu) {
         boardMenu.classList.remove("main-menu"); 
         boardMenu.classList.add("board-game"); 
 
-        if(currentTheme === THEMES.FOOD) { 
-            document.body.className = ""; 
-            document.body.classList.add("food-theme-background"); 
-        }
-
-        if(currentTheme === THEMES.ANIMALS) {  
-            document.body.className = ""; 
-            document.body.classList.add("animals-theme-background"); 
-        } 
-
-        if(currentTheme === THEMES.MAGIC) { 
-            document.body.className = ""; 
-            document.body.classList.add("magic-theme-background"); 
-        }
+        document.body.className = ""; 
+        document.body.classList.add(STYLES_THEMES[currentTheme]); 
         
         playGame();  
 }
 
-
-
-
-
-
-// function getMainMenuButtons() {  
-//     const mainMenuButtons = []; 
-//     const startButton = document.body.querySelector(".start-main-option"); 
-//     const themeButton = document.body.querySelector(".selector-main-option"); 
-//     mainMenuButtons.push(startButton, themeButton);  
-//     return mainMenuButtons; 
-// } 
-
-
- 
-function createButton (text, className) {
+function createButton (text, className, parentContainer) {
     const button = document.createElement("button"); 
     button.innerText = text;  
     button.classList.add(className); 
+    parentContainer.appendChild(button); 
     return button
 }
 
@@ -275,11 +207,8 @@ function generateWinnerScreen(board) {
     board.classList.remove("board-game"); 
     board.classList.add("winner-screen"); 
     
-    const playAgainButton = createButton(`${PLAY_AGAIN_SYMBOL} Play again`, "play-again-option")
-    const backMenuButton = createButton(`${BACK_MENU_SYMBOL} Back to main Menu`, "back-menu-option")
-
-    board.appendChild(playAgainButton);  
-    board.appendChild(backMenuButton);
+    createButton(`${PLAY_AGAIN_SYMBOL} Play again`, "play-again-option", board)
+    createButton(`${BACK_MENU_SYMBOL} Back to main Menu`, "back-menu-option", board)
     return board;       
 }
 
@@ -310,16 +239,8 @@ function pressBackMenuOption(backMenuButton) {
             winnerBoardScene.remove(); 
             document.body.className = ""; 
             generateMainMenu();  
-            // const boardMenu = generateMainMenu();  
-            // const  mainMenuButtons = getMainMenuButtons(); 
-            // const startMenuButton = mainMenuButtons[0]; 
-        })
-    
-}
-    
+        })  
+} 
 generateMainMenu();  
-// const menuButtons = getMainMenuButtons(); 
-// const startMenuButton = menuButtons[0]; 
-// const themesMenuButton = menuButtons[1]; 
 
  
