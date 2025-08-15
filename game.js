@@ -11,7 +11,10 @@ const PLAY_AGAIN_SYMBOL = "🔁";
 const BACK_MENU_SYMBOL = "🏠"; 
 const THEMES = {"food":FOOD_CONTENT_CARD, "animals":ANIMALS_CONTENT_CARD, "magic":MAGIC_CONTENT_CARD}
 const STYLES_THEMES = {"food": "food-theme-background", "animals": "animals-theme-background", "magic": "magic-theme-background"}
+const DEFEAT_MESSAGE = "You have lost"; 
 let currentTheme = "food"; 
+let errors = 0; 
+
 
 function generateGameBoard() {
 
@@ -64,7 +67,7 @@ function playGame() {
         card.addEventListener("click", () => {
             
             
-            if(cardsSelected.length < 2 && card.innerText === CARD_REVERSE) { 
+            if(cardsSelected.length < 2 && card.innerText === CARD_REVERSE && errors < 5) { 
                 card.innerText = deckContent[index]; 
                 cardsSelected.push(card);  
             } 
@@ -94,16 +97,44 @@ function playGame() {
 
 
 function compareCards(cards) { 
-
-    const [card1, card2] = cards
+ 
+    const [card1, card2] = cards 
 
     if(card1.innerText !== card2.innerText) {
-         console.log("No son iguales");  
+         console.log("No son iguales");
+         errors += 1; 
+         console.log("Has cometido un error. ");    
         setTimeout(() => { 
             card1.innerText = CARD_REVERSE; 
             card2.innerText = CARD_REVERSE; 
+
+            if(errors === 5) {
+                console.log("Has perdido. "); 
+                const defeatInformationBox = showDefeatInformation(); 
+                const backMenuButtonDefeat = createButton("Back to menu", "back-menu-defeat-option", defeatInformationBox);  
+               
+
+                backMenuButtonDefeat.addEventListener("click", () => {
+                    errors = 0; 
+                    const boardMenuContainer = document.querySelector(".board-game"); 
+                    boardMenuContainer.remove(); 
+                    document.body.className = ""; 
+                    generateMainMenu(); 
+                })
+            }
+
         }, MILISECONDS_FLIPPBACK_DELAY) 
     }       
+}
+
+function showDefeatInformation() {
+    const boardGameContainer = document.querySelector(".board-game"); 
+    const defeatInformationBox = document.createElement("div"); 
+    defeatInformationBox.classList.add("defeat-box");  
+    defeatInformationBox.innerText = DEFEAT_MESSAGE; 
+    boardGameContainer.appendChild(defeatInformationBox); 
+    return defeatInformationBox;  
+    
 }
 
 function checkIfPlayersWin() { 
